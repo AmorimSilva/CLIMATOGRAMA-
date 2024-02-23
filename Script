@@ -1,0 +1,81 @@
+Climatograma_vit <- read.csv("C:/Users/Samuel/Desktop/Climatograma_vit.csv", sep=";")
+View(Climatograma_vit)
+###
+
+par(mar=c(3, 3, 3, 3))
+#dimencoes do grafico
+plot.new()
+plot.window(xlim=c(0, 18.5),
+            ylim = c(0,270))
+axis(side = 2,
+     at = seq(0, 270, 120),
+     pos = 1,
+     las = 1)
+
+mtext("preciptacao (mm)",
+      side = 2,
+      line = 1.5,
+      font = 2)
+
+#linha base
+lines(c(0, 18.5),
+      c(0, 0),
+      font = 2)
+#barras
+pos.x = seq(1, 17.5, 1.5)
+
+#plot das barras
+rect(pos.x - 0.5, 0,
+     pos.x + 0.5, Climatograma_vit$Prec,
+     col = "blue",
+     border = "black")
+
+#plot de novo grafico
+par(new=TRUE)
+
+#definindo parametos 
+plot.window(xlim = c(0, 18.5),
+            ylim = c(0,35))
+#plot de temperatura
+axis(side = 4,
+     at = seq(0, 35, 5),
+     pos = 18.5,
+     las = 1)
+#rotulo
+mtext("temperatura (°c)",
+      side = 4,
+      line = 1,
+      font = 2)
+
+#plot do grafico de temperatura 
+lines(pos.x,
+      Climatograma_vit$Temp,
+      col= "red",
+      type = "l",
+      lwd = 2,
+      pch = 19)
+#plot os valores
+text(pos.x,
+     Climatograma_vit$Temp+1,
+    Climatograma_vit$Temp)
+
+#plot para mes
+par(new=TRUE)
+par(mar=c(2,3,3,3,))
+
+#difinindoa dimencoes para eixos
+plot.window(xlim=c(0,18.5),
+            ylim = c(-2,35))
+
+#mtext vazio
+mtext("",
+      side = 1,
+      line = 1)
+#agora vai identificas os meses 
+text(pos.x,
+     -3,
+     Climatograma_vit$Meses,
+     font = 2)
+
+title("Climatologia da Cidade de Natal de 1961-190")
+
